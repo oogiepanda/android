@@ -76,7 +76,7 @@ public class CrimeListFragment extends Fragment {
 
             return new CrimeHolder(layoutInflater, parent);
         }
-
+//Test comment
         @Override
         public void onBindViewHolder(@NonNull CrimeHolder holder, int position) {
             Crime crime = mCrimes.get(position);
