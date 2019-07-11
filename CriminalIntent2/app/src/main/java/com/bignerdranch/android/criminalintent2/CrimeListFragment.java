@@ -24,6 +24,8 @@ import java.util.List;
 
 public class CrimeListFragment extends Fragment {
 
+    private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
+
     private RecyclerView mCrimeRecyclerView;
     private CrimeAdapter mAdapter;
     private boolean mSubtitleVisible;
@@ -42,6 +44,10 @@ public class CrimeListFragment extends Fragment {
         mCrimeRecyclerView = (RecyclerView) view.findViewById(R.id.crime_recycler_view);
         mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        if(savedInstanceState != null) {
+            mSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
+        }
+
         updateUI();
 
         return view;
@@ -51,6 +57,12 @@ public class CrimeListFragment extends Fragment {
     public void onResume() {
         super.onResume();
         updateUI();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(SAVED_SUBTITLE_VISIBLE, mSubtitleVisible);
     }
 
     @Override
@@ -120,9 +132,12 @@ public class CrimeListFragment extends Fragment {
         if (mAdapter == null) {
             mAdapter = new CrimeAdapter(crimes);
             mCrimeRecyclerView.setAdapter(mAdapter);
-        } else {
+        } else {mAdapter.notifyDataSetChanged();
+
             mAdapter.notifyDataSetChanged();
         }
+
+        updateSubtitle();;
     }
 
     private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -180,6 +195,10 @@ public class CrimeListFragment extends Fragment {
         @Override
         public int getItemCount() {
             return mCrimes.size();
+        }
+
+        public void setCrimes(List<Crime> crimes) {
+            mCrimes = crimes;
         }
     }
 }
