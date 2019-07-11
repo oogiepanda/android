@@ -47,11 +47,12 @@ public class Crime {
         mSolved = solved;
     }
 
-   /* public String getSuspect() {
+    public String getSuspect() {
         return mSuspect;
     }
 
-    public void  setSuspect(String suspect) {
+    public void setSuspect(String suspect) {
         mSuspect = suspect;
-    }*/
+    }
+
 }
