@@ -3,7 +3,7 @@ package com.bignerdranch.android.criminalintent2;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
-public class CrimeListActivity extends SingleFragmentActivity implements CrimeListFragment.Callbacks{
+public class CrimeListActivity extends SingleFragmentActivity implements CrimeListFragment.Callbacks, CrimeFragment.Callbacks{
 
     @Override
     protected Fragment createFragment() {
@@ -28,5 +28,12 @@ public class CrimeListActivity extends SingleFragmentActivity implements CrimeLi
                     .replace(R.id.detail_fragment_container, newDetail)
                     .commit();
         }
+    }
+
+    public void onCrimeUpdated(Crime crime) {
+        CrimeListFragment listFragment = (CrimeListFragment)
+                getSupportFragmentManager()
+                        .findFragmentById(R.id.fragment_container);
+        listFragment.updateUI();
     }
 }
