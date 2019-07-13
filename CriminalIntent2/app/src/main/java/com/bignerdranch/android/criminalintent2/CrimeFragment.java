@@ -175,7 +175,7 @@ public class CrimeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Uri uri = FileProvider.getUriForFile(getActivity(),
-                        "com.bignerdranch.android.criminalintent.fileprovider",
+                        "com.bignerdranch.android.criminalintent2.fileprovider",
                         mPhotoFile);
                 captureImage.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 
@@ -252,7 +252,7 @@ public class CrimeFragment extends Fragment {
             }
         } else if (requestCode == REQUEST_PHOTO) {
             Uri uri = FileProvider.getUriForFile(getActivity(),
-                    "com.bignerdranch.android.criminalintent.fileprovider",
+                    "com.bignerdranch.android.criminalintent2.fileprovider",
                     mPhotoFile);
 
             getActivity().revokeUriPermission(uri,
