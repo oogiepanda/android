@@ -1,4 +1,4 @@
-package com.bignerdranch.android.criminalintent2;
+package com.bignerdranch.android.photogallery;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -12,20 +12,21 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     @LayoutRes
     protected int getLayoutResId() {
-        return  R.layout.activity_fragment;
+        return R.layout.activity_fragment;
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutResId());
-
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
+        FragmentManager manager = getSupportFragmentManager();
+        Fragment fragment = manager.findFragmentById(R.id.fragment_container);
 
         if (fragment == null) {
             fragment = createFragment();
-            fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
+            manager.beginTransaction()
+                    .add(R.id.fragment_container, fragment)
+                    .commit();
         }
     }
 }
