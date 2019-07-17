@@ -21,6 +21,7 @@ public class PollService extends IntentService {
 
     private static final long POLL_INTERVAL_MS = TimeUnit.MINUTES.toMillis(1);
 
+
     public static Intent newIntent(Context context) {
         return new Intent(context, PollService.class);
     }
@@ -40,6 +41,8 @@ public class PollService extends IntentService {
             alarmManager.cancel(pi);
             pi.cancel();
         }
+
+        QueryPreferences.setAlarmOn(context, isOn);
     }
 
     public static boolean isServiceAlarmOn(Context context) {
@@ -55,7 +58,7 @@ public class PollService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        if (isNetworkAvailableAndConnected()) {
+        if (!isNetworkAvailableAndConnected()) {
             return;
         }
         String query = QueryPreferences.getStoredQuery(this);
