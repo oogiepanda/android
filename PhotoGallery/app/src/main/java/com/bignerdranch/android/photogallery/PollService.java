@@ -11,6 +11,8 @@ import java.util.List;
 public class PollService extends IntentService {
     private static final String TAG = "PollService";
 
+
+
     public static Intent newIntent(Context context) {
         return new Intent(context, PollService.class);
     }
@@ -24,6 +26,9 @@ public class PollService extends IntentService {
         if (isNetworkAvailableAndConnected()) {
             return;
         }
+
+        //Log.i(TAG, "Received an intent: " + intent);
+
         String query = QueryPreferences.getStoredQuery(this);
         String lastResultId = QueryPreferences.getLastResultId(this);
         List<GalleryItem> items;
@@ -55,8 +60,7 @@ public class PollService extends IntentService {
                 (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
 
         boolean isNetworkAvailable = cm.getActiveNetworkInfo() != null;
-        boolean isNetworkConnected = isNetworkAvailable &&
-                cm.getActiveNetworkInfo().isConnected();
+        boolean isNetworkConnected = isNetworkAvailable && cm.getActiveNetworkInfo().isConnected();
 
         return isNetworkConnected;
     }
