@@ -1,5 +1,6 @@
 package com.bignerdranch.android.photogallery;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -42,6 +43,10 @@ public class PhotoGalleryFragment extends Fragment {
         setRetainInstance(true);
         setHasOptionsMenu(true);
         updateItems();
+
+//        Intent i = PollServiceB.newIntent(getActivity());
+//        getActivity().startService(i);
+        PollServiceB.setAlarm(getActivity(), true);
 
         Handler responseHandler = new Handler();
         mThumbnailDownloader = new ThumbnailDownloader<>(responseHandler);
@@ -194,7 +199,7 @@ public class PhotoGalleryFragment extends Fragment {
         }
     }
 
-    private class FetchItemsTask extends AsyncTask<Void,Void,List<GalleryItem>> {
+    private class FetchItemsTask extends AsyncTask<Void, Void, List<GalleryItem>> {
         private String mQuery;
 
         public FetchItemsTask(String query) {
@@ -208,7 +213,8 @@ public class PhotoGalleryFragment extends Fragment {
                 return new FlickrFetchr().fetchRecentPhotos();
             } else {
                 return new FlickrFetchr().searchPhotos(mQuery);
-            }        }
+            }
+        }
 
 
         @Override
