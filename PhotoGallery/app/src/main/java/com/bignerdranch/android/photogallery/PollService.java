@@ -24,6 +24,7 @@ public class PollService extends IntentService {
     private static final String TAG = "PollService";
 
     private static final long POLL_INTERVAL_MS = TimeUnit.MINUTES.toMillis(1);
+    private static final String CHANNEL_ID = "my_channel_01";
 
     public static Intent newIntent(Context context) {
         return new Intent(context, PollService.class);
@@ -84,35 +85,18 @@ public class PollService extends IntentService {
         } else {
             Log.i(TAG, "Got a new result: " + resultId);
 
-            Resources resources = getResources();
-            Intent i = PhotoGalleryActivity.newIntent(this);
-            PendingIntent pi = PendingIntent
-                    .getActivity(this, 0, i, 0);
+
+////////////////////////////////  Harlan look at this new code ////////////////////////////////////
+            Notification notification = new Notification.Builder(this, CHANNEL_ID)
+                    .setContentTitle("Message 4 Oogie")
+                    .setContentText("Harlan received new messages.")
+                    .setSmallIcon(android.R.drawable.ic_menu_report_image)
+                    .build();
+            NotificationManager notifMgr = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+/////////////////////////////////////////////////////////////////////////
 
 
-// Sets an ID for the notification, so it can be updated.
-            int notifyID = 1;
-            String CHANNEL_ID = "my_channel_01";// The id of the channel.
-            CharSequence name = getString(R.string.channel_name);// The user-visible name of the channel.
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
-
-// Create a notification and set the notification channel.
-                Notification notification = new Notification.Builder(this, CHANNEL_ID)
-                        .setContentTitle("New Message")
-                        .setContentText("You've received new messages.")
-                        .setSmallIcon(android.R.drawable.ic_menu_report_image)
-                        .build();
-
-                NotificationManager notifMgr = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                notifMgr.createNotificationChannel(mChannel);
-
-// Issue the notification.
-                notifMgr.notify(notifyID, notification);
-                Log.i(TAG, "fire notification");
-            }
+            notifMgr.notify(0, notification);
         }
 
         QueryPreferences.setLastResultId(this, resultId);
