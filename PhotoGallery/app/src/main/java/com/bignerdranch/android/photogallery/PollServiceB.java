@@ -38,12 +38,17 @@ public class PollServiceB extends IntentService {
         }
     }
 
+    public static boolean isAlarmOn(Context context) {
+        Intent i = PollService.newIntent(context);
+        PendingIntent pi = PendingIntent.getService(context, 0, i, PendingIntent.FLAG_NO_CREATE);
+        return pi != null;
+    }
 
     @Override
     protected void onHandleIntent(Intent intent) {
         if (!isNetworkAvailable()) return;
         Log.i(TAG, "Breceived intent: " + intent);
-        String query = QueryPreferences.getLastResultId(this);
+        String query = QueryPreferences.getStoredQuery(this);
 
 
         List<GalleryItem> items = (query == null)
@@ -53,7 +58,7 @@ public class PollServiceB extends IntentService {
 
         String id = items.get(0).getId();
         String lastId = QueryPreferences.getLastResultId(this);
-        Log.i(TAG, (id.equals(lastId)) ? " old Result: " : "new Result: " + id);
+        Log.i(TAG, ((id.equals(lastId)) ? " old Result: " : "new Result: ") + id);
         QueryPreferences.setLastResultId(this, id);
     }
 

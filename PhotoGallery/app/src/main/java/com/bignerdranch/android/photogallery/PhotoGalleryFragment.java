@@ -46,7 +46,7 @@ public class PhotoGalleryFragment extends Fragment {
 
 //        Intent i = PollServiceB.newIntent(getActivity());
 //        getActivity().startService(i);
-        PollServiceB.setAlarm(getActivity(), true);
+//        PollServiceB.setAlarm(getActivity(), true);
 
         Handler responseHandler = new Handler();
         mThumbnailDownloader = new ThumbnailDownloader<>(responseHandler);
@@ -121,11 +121,8 @@ public class PhotoGalleryFragment extends Fragment {
         });
 
         MenuItem toggleItem = menu.findItem(R.id.menu_item_toggle_polling);
-        if (PollService.isServiceAlarmOn(getActivity())) {
-            toggleItem.setTitle(R.string.stop_polling);
-        } else {
-            toggleItem.setTitle(R.string.start_polling);
-        }
+        boolean alarmOn = PollServiceB.isAlarmOn(getActivity());
+        toggleItem.setTitle(alarmOn ? R.string.stop_polling : R.string.start_polling);
     }
 
     @Override
@@ -136,8 +133,8 @@ public class PhotoGalleryFragment extends Fragment {
                 updateItems();
                 return true;
             case R.id.menu_item_toggle_polling:
-                boolean shouldStartAlarm = !PollService.isServiceAlarmOn(getActivity());
-                PollService.setServiceAlarm(getActivity(), shouldStartAlarm);
+                boolean shouldStartAlarm = !PollServiceB.isAlarmOn(getActivity());
+                PollServiceB.setAlarm(getActivity(), shouldStartAlarm);
                 getActivity().invalidateOptionsMenu();
                 return true;
             default:
@@ -208,14 +205,10 @@ public class PhotoGalleryFragment extends Fragment {
 
         @Override
         protected List<GalleryItem> doInBackground(Void... params) {
-
-            if (mQuery == null) {
-                return new FlickrFetchr().fetchRecentPhotos();
-            } else {
-                return new FlickrFetchr().searchPhotos(mQuery);
-            }
+            return (mQuery == null)
+                ? new FlickrFetchr().fetchRecentPhotos()
+                : new FlickrFetchr().searchPhotos(mQuery);
         }
-
 
         @Override
         protected void onPostExecute(List<GalleryItem> items) {
