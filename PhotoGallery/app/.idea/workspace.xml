@@ -57,7 +57,7 @@
           <file leaf-file-name="PollService.java" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/main/java/com/bignerdranch/android/photogallery/PollService.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="316">
+                <state relative-caret-position="706">
                   <caret line="90" selection-start-line="90" selection-end-line="94" selection-end-column="112" />
                   <folding>
                     <element signature="imports" expanded="true" />
@@ -2568,7 +2568,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-2038" y="-1448" width="2576" height="1416" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="7" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4986577" weight="0.32909605" />
@@ -2580,8 +2579,8 @@
       <window_info anchor="right" id="Preview" order="5" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" weight="0.32866043" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.5765101" weight="0.32398754" />
-      <window_info anchor="bottom" id="Logcat" order="11" sideWeight="0.7657718" visible="true" weight="0.30373833" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.5765101" visible="true" weight="0.32398754" />
+      <window_info anchor="bottom" id="Logcat" order="11" sideWeight="0.7657718" weight="0.30373833" />
       <window_info id="Captures" order="2" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
@@ -2960,7 +2959,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/bignerdranch/android/photogallery/PollService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
+        <state relative-caret-position="706">
           <caret line="90" selection-start-line="90" selection-end-line="94" selection-end-column="112" />
           <folding>
             <element signature="imports" expanded="true" />
