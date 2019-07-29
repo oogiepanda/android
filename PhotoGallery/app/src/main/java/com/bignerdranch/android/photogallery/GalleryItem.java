@@ -34,4 +34,3 @@ public class GalleryItem {
         return mCaption;
     }
 }
-
